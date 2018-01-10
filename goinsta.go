@@ -1243,7 +1243,9 @@ func (insta *Instagram) GetUserStories(userID int64) (response.StoryResponse, er
 		return result, err
 	}
 
-	json.Unmarshal([]byte(bytes), &result)
+	if err := json.Unmarshal([]byte(bytes), &result); err != nil {
+		return result, err
+	}
 
 	return result, nil
 }
